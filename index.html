@@ -569,19 +569,27 @@
   .section:nth-child(5) { animation-delay: 0.5s; }
 
   /* === RESPONSIVE === */
+
   @media (max-width: 900px) {
-    .hero { grid-template-columns: 1fr; }
-    .hero-visual { 
-      padding: 20px 32px 100px;
-      justify-content: flex-start;
-    }
-    .profile-ring { width: 200px; height: 200px; }
-    .hero-content { padding: 60px 32px 40px; }
-    .hero-name { font-size: clamp(44px, 10vw, 72px); white-space: normal; }
+    .hero { grid-template-columns: 1fr; min-height: auto; }
+    .hero-content { padding: 64px 48px 48px; }
+    .hero-visual { padding: 0 48px 100px; justify-content: flex-start; }
+    .profile-ring { width: 220px; height: 220px; }
+    .hero-name { font-size: clamp(44px, 8vw, 72px); white-space: normal; }
   }
+
   @media (max-width: 600px) {
-    .hero-visual { display: none; }
-    .hero-content { padding: 60px 24px 100px; }
+    .hero { display: flex; flex-direction: column; align-items: center; min-height: auto; padding-bottom: 80px; }
+    .hero-visual { display: flex; order: -1; padding: 52px 24px 24px; justify-content: center; }
+    .profile-ring { width: 180px; height: 180px; }
+    .profile-ring::before { inset: -14px; }
+    .profile-badge { font-size: 9px; padding: 5px 10px; right: -4px; bottom: 8px; }
+    .hero-content { padding: 0 28px; align-items: center; text-align: center; width: 100%; }
+    .hero-label { font-size: 10px; letter-spacing: 0.1em; white-space: normal; word-break: break-word; }
+    .hero-name { font-size: clamp(40px, 12vw, 60px); white-space: normal; text-align: center; }
+    .hero-title { font-size: 16px; text-align: center; margin-bottom: 32px; }
+    .hero-meta { align-items: center; }
+    .meta-row { font-size: 13px; }
     .entry { grid-template-columns: 1fr; gap: 4px; }
     .entry-date { text-align: left; padding-bottom: 4px; }
     .entry:not(:last-child)::after { display: none; }
@@ -591,12 +599,10 @@
     .edu-card.featured { grid-column: 1; }
     .edu-card.featured::after { position: static; margin-top: 12px; display: inline-block; }
     main { padding: 48px 20px 80px; }
-    .section-title { font-size: 30px; }
+    .section-title { font-size: 28px; }
     .section-header { gap: 10px; }
     .research-item { flex-wrap: wrap; gap: 8px; }
     .research-years { flex-basis: 100%; }
-    .hero-name { font-size: clamp(42px, 11vw, 68px); }
-    .hero-title { font-size: 18px; }
   }
 </style>
 </head>
