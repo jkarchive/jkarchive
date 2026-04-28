@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JiHoon Kim — Aquaculture Researcher</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ocean-deep: #042C53;
+    --ocean-mid: #0C447C;
+    --ocean-teal: #0F6E56;
+    --ocean-light: #E1F5EE;
+    --seafoam: #1D9E75;
+    --sand: #FAC775;
+    --ink: #1a1a2e;
+    --muted: #5a6a7a;
+    --surface: #f7f9fb;
+    --white: #ffffff;
+    --border: rgba(13, 68, 124, 0.12);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--surface);
+    color: var(--ink);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* === HERO === */
+  .hero {
+    background: var(--ocean-deep);
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: 
+      radial-circle(circle at 20% 80%, rgba(29, 158, 117, 0.15) 0%, transparent 50%),
+      url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='1' cy='1' r='1' fill='rgba(255,255,255,0.03)'/%3E%3C/svg%3E");
+    pointer-events: none;
+  }
+
+  /* Wave pattern */
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0; right: 0;
+    height: 120px;
+    background: var(--surface);
+    clip-path: ellipse(55% 100% at 50% 100%);
+  }
+
+  .hero-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 60px 140px;
+    position: relative;
+    z-index: 1;
+    animation: fadeUp 0.9s ease both;
+  }
+
+  .hero-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    font-weight: 300;
+    letter-spacing: 0.2em;
+    color: var(--seafoam);
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+
+  .hero-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(52px, 6vw, 80px);
+    font-weight: 300;
+    line-height: 1.05;
+    color: var(--white);
+    margin-bottom: 8px;
+  }
+
+  .hero-name em {
+    font-style: italic;
+    color: rgba(255,255,255,0.6);
+  }
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 300;
+    font-style: italic;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 48px;
+    line-height: 1.4;
+  }
+
+  .hero-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .meta-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.65);
+    font-weight: 300;
+  }
+
+  .meta-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.07);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .meta-row a {
+    color: var(--sand);
+    text-decoration: none;
+  }
+
+  .hero-visual {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 60px 140px;
+    position: relative;
+    z-index: 1;
+    animation: fadeUp 0.9s 0.2s ease both;
+  }
+
+  .profile-ring {
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    border: 1px solid rgba(29, 158, 117, 0.4);
+    padding: 12px;
+    position: relative;
+  }
+
+  .profile-ring::before {
+    content: '';
+    position: absolute;
+    inset: -20px;
+    border-radius: 50%;
+    border: 1px dashed rgba(255,255,255,0.08);
+  }
+
+  .profile-img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    background: var(--ocean-mid);
+    display: block;
+  }
+
+  .profile-badge {
+    position: absolute;
+    bottom: 12px;
+    right: -8px;
+    background: var(--seafoam);
+    color: white;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    padding: 6px 14px;
+    border-radius: 20px;
+  }
+
+  /* === MAIN === */
+  main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 80px 40px 120px;
+  }
+
+  .section {
+    margin-bottom: 80px;
+    animation: fadeUp 0.7s ease both;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+
+  .section-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--seafoam);
+    letter-spacing: 0.1em;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px;
+    font-weight: 400;
+    color: var(--ocean-deep);
+    letter-spacing: -0.01em;
+  }
+
+  .section-line {
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+    margin-left: 8px;
+  }
+
+  /* === TIMELINE ENTRY === */
+  .timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .entry {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 0 32px;
+    position: relative;
+    padding-bottom: 36px;
+  }
+
+  .entry:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    left: 200px;
+    top: 8px;
+    bottom: 0;
+    width: 1px;
+    background: var(--border);
+    transform: translateX(16px);
+  }
+
+  .entry-date {
+    text-align: right;
+    padding-top: 2px;
+  }
+
+  .entry-year {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  .entry-location {
+    font-size: 11px;
+    color: rgba(90, 106, 122, 0.6);
+    margin-top: 4px;
+  }
+
+  .entry-body {
+    position: relative;
+    padding-left: 40px;
+  }
+
+  .entry-body::before {
+    content: '';
+    position: absolute;
+    left: 12px;
+    top: 8px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    border: 1.5px solid var(--seafoam);
+    background: var(--surface);
+  }
+
+  .entry-org {
+    font-weight: 500;
+    font-size: 15px;
+    color: var(--ocean-deep);
+    line-height: 1.3;
+    margin-bottom: 3px;
+  }
+
+  .entry-role {
+    font-size: 13px;
+    color: var(--seafoam);
+    font-weight: 400;
+    margin-bottom: 6px;
+  }
+
+  .entry-desc {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.65;
+    font-weight: 300;
+  }
+
+  .entry-tag {
+    display: inline-block;
+    margin-top: 8px;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    color: var(--ocean-mid);
+    background: rgba(12, 68, 124, 0.07);
+    padding: 3px 10px;
+    border-radius: 12px;
+  }
+
+  /* === EDUCATION CARDS === */
+  .edu-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .edu-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px;
+    transition: border-color 0.2s, transform 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .edu-card:hover {
+    border-color: rgba(29, 158, 117, 0.3);
+    transform: translateY(-2px);
+  }
+
+  .edu-card.featured {
+    grid-column: 1 / -1;
+    background: var(--ocean-deep);
+    border-color: transparent;
+  }
+
+  .edu-card.featured .edu-degree,
+  .edu-card.featured .edu-school {
+    color: var(--white);
+  }
+
+  .edu-card.featured .edu-period {
+    color: var(--seafoam);
+  }
+
+  .edu-card.featured .edu-field {
+    color: rgba(255,255,255,0.5);
+  }
+
+  .edu-card.featured::after {
+    content: 'In progress';
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    color: var(--seafoam);
+    border: 1px solid rgba(29,158,117,0.4);
+    padding: 3px 10px;
+    border-radius: 20px;
+    text-transform: uppercase;
+  }
+
+  .edu-level {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    color: var(--seafoam);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .edu-card.featured .edu-level {
+    color: var(--sand);
+  }
+
+  .edu-degree {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--ocean-deep);
+    line-height: 1.2;
+    margin-bottom: 4px;
+  }
+
+  .edu-field {
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 12px;
+    font-weight: 300;
+  }
+
+  .edu-school {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 2px;
+  }
+
+  .edu-period {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+  }
+
+  /* === RESEARCH === */
+  .research-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .research-item {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 24px;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    transition: border-color 0.2s;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .research-item:hover {
+    border-color: rgba(29, 158, 117, 0.35);
+  }
+
+  .research-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--seafoam);
+    flex-shrink: 0;
+    padding-top: 2px;
+  }
+
+  .research-title {
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--ink);
+    font-weight: 400;
+    flex: 1;
+  }
+
+  .research-years {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    flex-shrink: 0;
+    padding-top: 2px;
+  }
+
+  /* === PAPERS === */
+  .papers-grid {
+    display: grid;
+    gap: 16px;
+  }
+
+  .paper-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--seafoam);
+    border-radius: 0 12px 12px 0;
+    padding: 20px 24px;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    transition: border-color 0.2s, transform 0.15s;
+  }
+
+  .paper-card:hover {
+    border-left-color: var(--ocean-mid);
+    transform: translateX(3px);
+  }
+
+  .paper-type {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: var(--seafoam);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .paper-title {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--ink);
+  }
+
+  .patent-card {
+    border-left-color: var(--sand);
+  }
+
+  .patent-card:hover {
+    border-left-color: #BA7517;
+  }
+
+  .patent-card .paper-type {
+    color: #BA7517;
+  }
+
+  /* === FOOTER === */
+  footer {
+    background: var(--ocean-deep);
+    color: rgba(255,255,255,0.4);
+    text-align: center;
+    padding: 48px 24px;
+    font-size: 12px;
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.05em;
+  }
+
+  footer a {
+    color: var(--seafoam);
+    text-decoration: none;
+  }
+
+  /* === ANIMATIONS === */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .section:nth-child(1) { animation-delay: 0.1s; }
+  .section:nth-child(2) { animation-delay: 0.2s; }
+  .section:nth-child(3) { animation-delay: 0.3s; }
+  .section:nth-child(4) { animation-delay: 0.4s; }
+  .section:nth-child(5) { animation-delay: 0.5s; }
+
+  /* === RESPONSIVE === */
+  @media (max-width: 768px) {
+    .hero { grid-template-columns: 1fr; }
+    .hero-visual { display: none; }
+    .hero-content { padding: 60px 32px 120px; }
+    .entry { grid-template-columns: 1fr; }
+    .entry-date { text-align: left; }
+    .entry:not(:last-child)::after { display: none; }
+    .edu-grid { grid-template-columns: 1fr; }
+    .edu-card.featured { grid-column: 1; }
+    main { padding: 60px 24px 80px; }
+    .section-title { font-size: 28px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-content">
+    <p class="hero-label">Aquaculture Researcher &amp; Engineer</p>
+    <h1 class="hero-name">JiHoon<br><em>Kim</em></h1>
+    <p class="hero-title">Recirculating Aquaculture Systems<br>Atlantic Salmon · Water Quality · RAS Design</p>
+    <div class="hero-meta">
+      <div class="meta-row">
+        <span class="meta-icon">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </span>
+        <a href="mailto:zxasdf123@naver.com">zxasdf123@naver.com</a>
+      </div>
+      <div class="meta-row">
+        <span class="meta-icon">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </span>
+        Pohang, South Korea
+      </div>
+      <div class="meta-row">
+        <span class="meta-icon">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        </span>
+        Born Oct. 16, 1997
+      </div>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="profile-ring">
+      <img class="profile-img" 
+           src="https://lh3.googleusercontent.com/sitesv/AA5AbUD6tsevbeNy0PIP39C1NhZ0SF1j2y0m8n8_eEe5JJ1IwqbcH_Xg4n_09bp6Pd8nZhqiHdNtU46d-9OzhmM3Fc0VZjj98Toj_-wYvuMaOGc7iNQDDXXQ9leSO5sySGYnih-6quNKBlqBU9F_nsxiD9fIjj2FpE8nA1p5ucQcUsZ8pDLn9C7bOExQjT-xPZ3F9jlWNMZvRbjTGCIFK-jtUkJWb7iAcYSfN40-hRU=w1280"
+           alt="JiHoon Kim">
+      <div class="profile-badge">M.S. Candidate 2025</div>
+    </div>
+  </div>
+</header>
+
+<!-- MAIN -->
+<main>
+
+  <!-- WORK EXPERIENCE -->
+  <section class="section">
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <h2 class="section-title">Work Experience</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="timeline">
+      <div class="entry">
+        <div class="entry-date">
+          <div class="entry-year">Apr. 2025 — present</div>
+          <div class="entry-location">Pohang, Korea</div>
+        </div>
+        <div class="entry-body">
+          <div class="entry-org">Mirae Aqua Farm Co., Ltd.</div>
+          <div class="entry-role">Assistant Manager · Aquaculture Production Team</div>
+          <div class="entry-desc">Operating an 800-tonne land-based RAS facility for Atlantic salmon farming — overseeing water quality, feeding regimes, and production stability across all rearing units.</div>
+          <span class="entry-tag">RAS · Atlantic Salmon</span>
+        </div>
+      </div>
+      <div class="entry">
+        <div class="entry-date">
+          <div class="entry-year">Jun. 2024 — Jan. 2025</div>
+          <div class="entry-location">Ulsan, Korea</div>
+        </div>
+        <div class="entry-body">
+          <div class="entry-org">Korea Standard Inspection Services</div>
+          <div class="entry-role">Researcher · Eco-friendly Department</div>
+          <div class="entry-desc">Testing and inspection of freshwater, saltwater, wastewater, ballast water, wood-pellet samples across industrial and marine environments. Conducted compliance analyses under national environmental standards.</div>
+          <span class="entry-tag">Water Quality · Inspection</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section class="section">
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <h2 class="section-title">Education</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="edu-grid">
+      <div class="edu-card featured">
+        <div class="edu-level">M.S. Graduate</div>
+        <div class="edu-degree">Fisheries Biology</div>
+        <div class="edu-field">Aquaculture Engineering Laboratory</div>
+        <div class="edu-school">Pukyong National University</div>
+        <div class="edu-period">Mar. 2024 — Aug. 2025 · Busan, Korea</div>
+      </div>
+      <div class="edu-card">
+        <div class="edu-level">B.S. Undergraduate</div>
+        <div class="edu-degree">Aquaculture &amp; Applied Life Science</div>
+        <div class="edu-field">Pukyong National University</div>
+        <div class="edu-school">Busan, Korea</div>
+        <div class="edu-period">Mar. 2022 — Feb. 2024</div>
+      </div>
+      <div class="edu-card">
+        <div class="edu-level">A.S. Associate</div>
+        <div class="edu-degree">Aquaculture</div>
+        <div class="edu-field">RAS Laboratory · GSU</div>
+        <div class="edu-school">Gangwon State University</div>
+        <div class="edu-period">Mar. 2020 — Feb. 2022 · Gangneung, Korea</div>
+      </div>
+      <div class="edu-card">
+        <div class="edu-level">High School</div>
+        <div class="edu-degree">Diploma</div>
+        <div class="edu-field">Georgia Christian School</div>
+        <div class="edu-school">Georgia, USA</div>
+        <div class="edu-period">Aug. 2013 — May. 2016</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ADDITIONAL EXPERIENCE -->
+  <section class="section">
+    <div class="section-header">
+      <span class="section-num">03</span>
+      <h2 class="section-title">Additional Experience</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="timeline">
+      <div class="entry">
+        <div class="entry-date">
+          <div class="entry-year">Mar. 2022 — May 2025</div>
+          <div class="entry-location">Busan, Korea</div>
+        </div>
+        <div class="entry-body">
+          <div class="entry-org">PKNU Aquaculture Engineering Lab</div>
+          <div class="entry-role">Student Researcher</div>
+        </div>
+      </div>
+      <div class="entry">
+        <div class="entry-date">
+          <div class="entry-year">Jun. 2022 — Feb. 2024</div>
+          <div class="entry-location">Busan, Korea</div>
+        </div>
+        <div class="entry-body">
+          <div class="entry-org">AquaPro Co., Ltd.</div>
+          <div class="entry-role">Summer &amp; Winter Intern</div>
+        </div>
+      </div>
+      <div class="entry">
+        <div class="entry-date">
+          <div class="entry-year">Mar. 2020 — Feb. 2022</div>
+          <div class="entry-location">Gangneung, Korea</div>
+        </div>
+        <div class="entry-body">
+          <div class="entry-org">GSU Recirculating Aquaculture System Lab</div>
+          <div class="entry-role">Student Researcher</div>
+        </div>
+      </div>
+      <div class="entry">
+        <div class="entry-date">
+          <div class="entry-year">Jun. 2020 — Feb. 2022</div>
+          <div class="entry-location">Gangneung, Korea</div>
+        </div>
+        <div class="entry-body">
+          <div class="entry-org">E.A.E. – RAS Construction</div>
+          <div class="entry-role">Summer &amp; Winter Intern</div>
+        </div>
+      </div>
+      <div class="entry">
+        <div class="entry-date">
+          <div class="entry-year">Jun. 2017 — Mar. 2019</div>
+          <div class="entry-location">Gangwon-do, Korea</div>
+        </div>
+        <div class="entry-body">
+          <div class="entry-org">Republic of Korea Army</div>
+          <div class="entry-role">The 23rd Infantry Division · Mandatory Service</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESEARCH -->
+  <section class="section">
+    <div class="section-header">
+      <span class="section-num">04</span>
+      <h2 class="section-title">Research Projects</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="research-list">
+      <a class="research-item" href="https://daon.distep.re.kr/info/biz/U202411365" target="_blank">
+        <span class="research-num">R01</span>
+        <span class="research-title">Development of digital aqua twin core platform for optimal aquafarm design and operation</span>
+        <span class="research-years">2022–24</span>
+      </a>
+      <a class="research-item" href="https://www.kimst.re.kr/contentNewFile.do?path=FinalReport&fn=202601091057405950&dn=20210044%28RS-2021-KS211405%29_FinalReport.pdf&gb=www" target="_blank">
+        <span class="research-num">R02</span>
+        <span class="research-title">Development of standardization technologies for marine and fishery industry equipment</span>
+        <span class="research-years">2022–23</span>
+      </a>
+      <a class="research-item" href="https://www.kimst.re.kr/contentNewFile.do?path=FinalReport&fn=202406030344443023&dn=FinalReport%2820210325%29%28RS-2021-KS211452%29.pdf&gb=www" target="_blank">
+        <span class="research-num">R03</span>
+        <span class="research-title">Development of integrated technology to improve productivity and safety of the freshwater RAS</span>
+        <span class="research-years">2022–23</span>
+      </a>
+      <a class="research-item" href="https://www.kimst.re.kr/contentNewFile.do?path=FinalReport&fn=2023060120200448&dn=%28%EA%B3%B5%EA%B0%9C%2920200448_FinalReport.pdf&gb=www" target="_blank">
+        <span class="research-num">R04</span>
+        <span class="research-title">Development of Predictive Maintenance Technologies and Training Materials for Production Stability and Risk Management in Fish Culture Systems with Automated Equipment</span>
+        <span class="research-years">2022</span>
+      </a>
+      <a class="research-item" href="https://www.kimst.re.kr/contentNewFile.do?path=FinalReport&fn=202406030337213780&dn=FinalReport%2820180361%29%28RS-2018-KS181184%29.pdf&gb=www" target="_blank">
+        <span class="research-num">R05</span>
+        <span class="research-title">Development of an Industrial-type Multi-Level Complex Aquaculture Techniques Using Deep Seawater</span>
+        <span class="research-years">2020–21</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- PAPERS & PATENTS -->
+  <section class="section">
+    <div class="section-header">
+      <span class="section-num">05</span>
+      <h2 class="section-title">Papers &amp; Patents</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="papers-grid">
+      <a class="paper-card" href="https://www.dbpia.co.kr/Journal/articleDetail?nodeId=NODE11503975" target="_blank">
+        <div class="paper-type">Journal Paper</div>
+        <div class="paper-title">Development of a Growth Prediction Model for Production Stability and Risk Management in Fish Culture Systems with Automated Equipment</div>
+      </a>
+      <a class="paper-card" href="https://english.ksfme.or.kr/xml/40303/40303.pdf" target="_blank">
+        <div class="paper-type">Journal Paper</div>
+        <div class="paper-title">Water Quality Changes in Artificial Effluent after Polymer Flocculant and Ozonation Treatment in Freshwater Recirculating Aquaculture System</div>
+      </a>
+      <a class="paper-card" href="https://www.riss.kr/search/download/FullTextDownload.do?control_no=9709cf5e6dcd5e5dffe0bdc3ef48d419&p_mat_type=be54d9b8bc7cdb09&p_submat_type=f1a8c7a1de0e08b8&fulltext_kind=a8cb3aaead67ab5b&t_gubun=&convertFlag=&naverYN=&outLink=K&nationalLibraryLocalBibno=&searchGubun=true&colName=bib_t&DDODFlag=&loginFlag=1&url_type=&query=&content_page=&url=&dbName=&dbId=&an=&dbNameDpShort=&pissn=&eissn=" target="_blank">
+        <div class="paper-type">Journal Paper</div>
+        <div class="paper-title">Evaluation of Dissolved Oxygen Mass Balance Model for Rainbow Trout (Oncorhynchus mykiss) under Variable Flow Rates in a Recirculating Aquaculture System</div>
+      </a>
+      <a class="paper-card patent-card" href="https://patentsgazette.uspto.gov/week10/OG/html/1532-2/US12245575-20250311.html" target="_blank">
+        <div class="paper-type">USPTO Patent</div>
+        <div class="paper-title">Apparatus for control water flow based on fish oxygen consumption and method for control water flow using the same · US12245575 (2025)</div>
+      </a>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>JiHoon Kim · Pohang, South Korea · <a href="mailto:zxasdf123@naver.com">zxasdf123@naver.com</a></p>
+</footer>
+
+</body>
+</html>
