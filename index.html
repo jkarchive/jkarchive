@@ -589,7 +589,8 @@
     .hero-name { font-size: clamp(40px, 12vw, 60px); white-space: normal; text-align: center; }
     .hero-title { font-size: 16px; text-align: center; margin-bottom: 32px; }
     .hero-meta { align-items: center; }
-    .meta-row { font-size: 13px; }
+    .meta-row { font-size: 13px; flex-wrap: wrap; }
+    .hero-meta { width: 100%; }
     .entry { grid-template-columns: 1fr; gap: 4px; }
     .entry-date { text-align: left; padding-bottom: 4px; }
     .entry:not(:last-child)::after { display: none; }
@@ -700,7 +701,7 @@
       </div>
       <div class="edu-card">
         <div class="edu-level">B.S. Undergraduate</div>
-        <div class="edu-degree">Aquaculture &amp; Applied Life Science</div>
+        <div class="edu-degree">Aquaculture &amp; Applied Life Sci.</div>
         <div class="edu-field">Pukyong National University</div>
         <div class="edu-school">Busan, Korea</div>
         <div class="edu-period">Mar. 2022 — Feb. 2024</div>
